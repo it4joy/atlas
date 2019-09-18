@@ -1,2 +1,2 @@
 # atlas
-Test task for Atlas
+Test task for Atlas; vacancy: "Fullstack (PHP + JS + HTML) Developer"  
