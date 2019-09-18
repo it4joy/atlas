@@ -1,5 +1,10 @@
 .html {
     box-sizing: border-box;
+    font-family: 'Open Sans', Tahoma, sans-serif;
+}
+
+.body {
+    margin: 0;
 }
 
 *,
@@ -124,6 +129,21 @@
   -ms-flex: 0 0 100%;
       flex: 0 0 100%;
   max-width: 100%;
+}
+
+
+/* Forms */
+
+.form-group {
+    
+}
+
+.form-label {
+    
+}
+
+.form-field {
+    
 }
 
 @media (min-width: 1200px) {

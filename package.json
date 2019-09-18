@@ -4,8 +4,16 @@
   "description": "test",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node test/server.js"
   },
   "author": "Igor Ivanov",
-  "license": "GNU GPL v.3"
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "github:it4joy/atlas"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "node-static": "^0.7.11"
+  }
 }
