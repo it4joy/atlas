@@ -6,7 +6,8 @@
         <title>Atlas - test task</title>
 
         <link href="css/main.css" rel="stylesheet" type="text/css">
-        <script src="js/main.js" type="text/javascript" async></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+        <script src="js/main.js" type="text/javascript" defer></script>
     </head>
 
     <body class="body">
@@ -16,34 +17,68 @@
             </noscript>
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h3 class="h3">Информация о пользователе</h3>
-                        <p class="p">Укажите, пожалуйста, ваши данные.</p>
-                        <form>
-                            <div class="form-group">
-                                <label for="fullname" class="form-label">ФИО 
-                                    <sup>*</sup>
-                                </label>
-                                <input type="text" id="fullname" class="form-field" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email 
-                                    <sup>*</sup>
-                                </label>
-                                <input type="email" id="email" class="form-field" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="birthday" class="form-label">Дата рождения</label>
-                                <input type="date" id="birthday" class="form-field">
-                            </div>
-                            <div class="form-group">
-                                <label for="gender" class="form-label">Пол</label>
-                                <select id="gender">
-                                    <option>Мужской</option>
-                                    <option>Женский</option>
-                                </select>
-                            </div>
-                        </form>
+                    <div class="col-8 offset-2">
+                        <div class="ui-block">
+                            <h3 class="h3">Информация о пользователе</h3>
+                            <p class="p">Укажите, пожалуйста, ваши данные.</p>
+                            <form id="user-info-form">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="fullname" class="form-label">ФИО 
+                                            <sup>*</sup>
+                                        </label>
+                                        <input type="text" id="fullname" name="fullname" class="form-field">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="email" class="form-label">Email 
+                                            <sup>*</sup>
+                                        </label>
+                                        <input type="text" id="email" name="email" class="form-field">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="birthday" class="form-label">Дата рождения</label>
+                                        <input type="date" id="birthday" name="birthday" class="form-field">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="gender" class="form-label">Пол</label>
+                                        <select id="gender" name="gender" class="form-field">
+                                            <option>Мужской</option>
+                                            <option>Женский</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="doc-type" class="form-label">Тип документа</label>
+                                        <input type="text" id="doc-type" name="doc-type" class="form-field">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="doc-number" class="form-label">Номер документа</label>
+                                        <input type="text" id="doc-number" name="doc-number" class="form-field">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <p class="p">Права доступа</p>
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="rights-1" name="rights[]" value="A">
+                                            <label for="rights-1" class="form-label d-inline-block">Доступ к разделу А</label>
+                                        </div>
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="rights-2" name="rights[]" value="Б">
+                                            <label for="rights-2" class="form-label d-inline-block">Доступ к разделу Б</label>
+                                        </div>
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="rights-3" name="rights[]" value="В">
+                                            <label for="rights-3" class="form-label d-inline-block">Доступ к разделу В</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-save" disabled>Сохранить</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
