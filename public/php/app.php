@@ -7,6 +7,7 @@ $errArray = array(
     "invalidEmail" => "Email необходимо ввести в формате (пример): example@domain.com (без пробелов).",
     "notANumber" => "Пожалуйста, введите числа.",
     "requestFailure" => "Произошла ошибка, попробуйте отправить запись позже.",
+    "noRecords" => "Нет записей для отображения",
 );
 
 // regExps
@@ -78,6 +79,8 @@ if ( !empty($_POST) ) {
             }
 
             echo json_encode($records);
+        } else {
+            echo json_encode( $errArray["noRecords"] );
         }
     }
 }

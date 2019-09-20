@@ -36,9 +36,47 @@ $(document).ready(function() {
             data: {
                 action: 'get_records'
             },
-            
+            success: function(data) {
+                const content = $.parseJSON(data);
+
+                $.each(content, function(i, record) {
+                    $('.ajax-content').append(`
+                        <div class='card'>
+                            <div class='row'>
+                                <div class='col-6'>
+                                    <p class='p'><strong>ФИО:</strong> ${record.Full_Name}</p>
+                                    <p class='p'><strong>Дата рождения:</strong> ${record.Birthday}</p>
+                                    <p class='p'><strong>Тип документа:</strong> ${record.Doc_Type}</p>
+                                    <p class='p'><strong>Права на доступ:</strong> ${record.Rights}</p>
+                                    <p class='p'><strong>Броузер (UserAgent):</strong> ${record.Browser}</p>
+                                </div>
+                                <div class='col-6'>
+                                    <p class='p'><strong>Email:</strong> ${record.Email}</p>
+                                    <p class='p'><strong>Пол:</strong> ${record.Gender}</p>
+                                    <p class='p'><strong>Номер документа:</strong> ${record.Doc_Number}</p>
+                                    <p class='p'><strong>IP-адрес:</strong> ${record.User_IP}</p>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-6'>
+                                    <p class='p text-muted'><strong>Время добавления записи:</strong> ${record.Time_Stamp}</p>
+                                </div>
+                                <div class='col-6'>
+                                    <p class='p text-muted'><strong>ID пользователя:</strong> ${record.User_ID}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            },
+            error: function(jqxhr, status, errMsg) {
+                console.log(`Статус: ${status}. Ошибка: ${errMsg}`);
+                alert(errMsg); // test
+            }
         });
     };
+
+    getRecords();
 
     // gets the name of browser
     const browser = navigator.userAgent;

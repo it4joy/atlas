@@ -450,10 +450,27 @@ textarea {
 }
 
 
+/* Typography */
+
+.text-muted {
+    color: #868e96;
+}
+
+
 /* UI components */
 
 .ui-block {
     padding: 1.5rem 0;
+}
+
+.card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    word-wrap: break-word;
 }
 
 
