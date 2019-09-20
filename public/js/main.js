@@ -48,7 +48,7 @@ $(document).ready(function() {
                                     <p class='p'><strong>Дата рождения:</strong> ${record.Birthday}</p>
                                     <p class='p'><strong>Тип документа:</strong> ${record.Doc_Type}</p>
                                     <p class='p'><strong>Права на доступ:</strong> ${record.Rights}</p>
-                                    <p class='p'><strong>Броузер (UserAgent):</strong> ${record.Browser}</p>
+                                    <p class='p'><strong>Броузер (User-Agent):</strong> ${record.Browser}</p>
                                 </div>
                                 <div class='col-6'>
                                     <p class='p'><strong>Email:</strong> ${record.Email}</p>
@@ -81,7 +81,7 @@ $(document).ready(function() {
     // gets the name of browser
     const browser = navigator.userAgent;
 
-    // form elements
+    // user info form
     const userInfoForm = $('#user-info-form');
     const btnSave = userInfoForm.find('.btn-save');
     const userFullName = userInfoForm.find('#fullname');
@@ -89,6 +89,34 @@ $(document).ready(function() {
     const userBirthday = userInfoForm.find('#birthday');
     const docType = userInfoForm.find('#doc-type');
     const docNumber = userInfoForm.find('#doc-number');
+    
+    // searching form
+    const searchingForm = $('#searching-form');
+    let searchRequestLength, searchRequestLengthPast = 0;
+    
+    // finds a match
+    searchingForm.find('input').on('input', function() {
+        const searchRequest = $(this).val();
+        searchRequestLength = searchRequest.length;
+
+        // N: check is '.card' exists
+        $('.card').each(function(i, el) {
+            const children = $(this).children();
+
+            children.each(function(i, el) {
+                if ( $(el).text().search(searchRequest) !== -1 ) {
+                    $('.card').hide();
+                    $(el).parents('.card').show();
+                }
+            });
+        });
+
+        if (searchRequestLength < searchRequestLengthPast) {
+            $('.card').show();
+        }
+
+        searchRequestLengthPast = searchRequestLength;
+    });
 
     let requiredFields = false;
 
