@@ -90,24 +90,19 @@ $(document).ready(function() {
     const userBirthday = userInfoForm.find('#birthday');
     const docType = userInfoForm.find('#doc-type');
     const docNumber = userInfoForm.find('#doc-number');
-    
+
+
     // searching form
     const searchingForm = $('#searching-form');
+    const searchField = $('#search-field');
     const btnSearch = $('.btn-search');
-    const searchResult = false; // ?..
 
     btnSearch.on('click', function() {
         // removes class '.searching-result' from the card marked in the past
         $('.card').removeClass('searching-result');
 
-        searchingForm.find('input').each(function(i, el) {
-            if ( $(el).val() !== '' ) {
-                $(el).addClass('searching-input');
-            }
-        });
-
-        const searchInput = $('.searching-input');
-        const searchRequest = $(searchInput).val();
+        // N: add validation!
+        const searchRequest = $(searchField).val();
 
         // N: check is '.card' exists
         $('.card').each(function(i, el) {
@@ -123,18 +118,21 @@ $(document).ready(function() {
         });
 
         if ( $('.searching-result').length === 0 ) {
-            outputError(searchingForm, searchInput, 'nothingFound');
+            outputError(searchingForm, searchField, 'nothingFound');
             setTimeout(function() {
-                $(searchInput).val('');
+                searchField.val('');
                 $('.card').show();
                 btnSearch.attr('disabled', true);
             }, 2000);
         }
     });
 
-    // shows all of cards if user is typing again
-    searchingForm.find('input').on('input', function() {
+    // shows all of cards if user is typing again - test
+    searchField.on('input', function() {
         $('.card').show();
+        if ( $('.card').hasClass('.searching-result') ) {
+            $('.card').removeClass('.searching-result');
+        }
     });
 
 
