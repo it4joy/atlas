@@ -5,6 +5,7 @@ $(document).ready(function() {
         emptyFields: 'Заполните, пожалуйста, поле.',
         invalidEmail: 'Email необходимо ввести в формате (пример): example@domain.com (без пробелов).',
         notANumber: 'Пожалуйста, введите числа.',
+        nothingFound: 'Ничего не найдено',
     };
 
     const errorBlock = '<div class="error-block"><p class="p"></p></div>';
@@ -92,12 +93,21 @@ $(document).ready(function() {
     
     // searching form
     const searchingForm = $('#searching-form');
-    let searchRequestLength, searchRequestLengthPast = 0;
-    
-    // finds a match
-    searchingForm.find('input').on('input', function() {
-        const searchRequest = $(this).val();
-        searchRequestLength = searchRequest.length;
+    const btnSearch = $('.btn-search');
+    const searchResult = false; // ?..
+
+    btnSearch.on('click', function() {
+        // removes class '.searching-result' from the card marked in the past
+        $('.card').removeClass('searching-result');
+
+        searchingForm.find('input').each(function(i, el) {
+            if ( $(el).val() !== '' ) {
+                $(el).addClass('searching-input');
+            }
+        });
+
+        const searchInput = $('.searching-input');
+        const searchRequest = $(searchInput).val();
 
         // N: check is '.card' exists
         $('.card').each(function(i, el) {
@@ -105,23 +115,34 @@ $(document).ready(function() {
 
             children.each(function(i, el) {
                 if ( $(el).text().search(searchRequest) !== -1 ) {
+                    $(el).parents('.card').addClass('searching-result');
                     $('.card').hide();
-                    $(el).parents('.card').show();
+                    $('.searching-result').show();
                 }
             });
         });
 
-        if (searchRequestLength < searchRequestLengthPast) {
-            $('.card').show();
+        if ( $('.searching-result').length === 0 ) {
+            outputError(searchingForm, searchInput, 'nothingFound');
+            setTimeout(function() {
+                $(searchInput).val('');
+                $('.card').show();
+                btnSearch.attr('disabled', true);
+            }, 2000);
         }
-
-        searchRequestLengthPast = searchRequestLength;
     });
+
+    // shows all of cards if user is typing again
+    searchingForm.find('input').on('input', function() {
+        $('.card').show();
+    });
+
 
     let requiredFields = false;
 
     $('input').on('input', function() {
         btnSave.attr('disabled', false);
+        btnSearch.attr('disabled', false);
     });
 
     btnSave.on('click', function() {
