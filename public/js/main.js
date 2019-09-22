@@ -128,18 +128,19 @@ $(document).ready(function() {
         searchRequest = searchRequest.trim();
         const regExp = new RegExp(searchRequest, 'i');
 
-        // N: check is '.card' exists
-        $('.card').each(function(i, el) {
-            const children = $(this).children();
+        if ( $('.card').length > 0 ) {
+            $('.card').each(function(i, el) {
+                const children = $(this).children();
 
-            children.each(function(i, el) {
-                if ( $(el).text().search(regExp) !== -1 ) {
-                    $(el).parents('.card').addClass('searching-result');
-                    $('.card').hide();
-                    $('.searching-result').show();
-                }
+                children.each(function(i, el) {
+                    if ( $(el).text().search(regExp) !== -1 ) {
+                        $(el).parents('.card').addClass('searching-result');
+                        $('.card').hide();
+                        $('.searching-result').show();
+                    }
+                });
             });
-        });
+        }
 
         if ( $('.searching-result').length === 0 ) {
             outputError(searchingForm, searchField, 'nothingFound');
