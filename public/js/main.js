@@ -12,7 +12,6 @@ $(document).ready(function() {
 
     const outputError = (form, field, errorType) => {
         field.addClass('form-field-error');
-        console.log(field);
 
         form.append(errorBlock);
 
@@ -72,12 +71,12 @@ $(document).ready(function() {
             },
             error: function(jqxhr, status, errMsg) {
                 console.log(`Статус: ${status}. Ошибка: ${errMsg}`);
-                alert(errMsg); // test
             }
         });
     };
 
     getRecords();
+
 
     // gets the name of browser
     const browser = navigator.userAgent;
@@ -97,19 +96,38 @@ $(document).ready(function() {
     const searchField = $('#search-field');
     const btnSearch = $('.btn-search');
 
+    // N: this event works in two-direction (input, erasing) in everywhere except for MS IE
+    searchField.on('input', function() {
+        btnSearch.attr('disabled', false);
+
+        const searchFieldVal = $(this).val();
+
+        if (searchFieldVal.length < 1) {
+            btnSearch.attr('disabled', true);
+
+            $('.card').show();
+
+            if ( $('div').hasClass('searching-result') ) {
+                $('div').removeClass('searching-result');
+            }
+        }
+    });
+
+    // processes event of click on '.btn-search'
     btnSearch.on('click', function() {
         // removes class '.searching-result' from the card marked in the past
-        $('.card').removeClass('searching-result');
+        //$('.card').removeClass('searching-result');
 
-        // N: add validation!
-        const searchRequest = $(searchField).val();
+        let searchRequest = $(searchField).val();
+        searchRequest = searchRequest.trim();
+        const regExp = new RegExp(searchRequest, 'i');
 
         // N: check is '.card' exists
         $('.card').each(function(i, el) {
             const children = $(this).children();
 
             children.each(function(i, el) {
-                if ( $(el).text().search(searchRequest) !== -1 ) {
+                if ( $(el).text().search(regExp) !== -1 ) {
                     $(el).parents('.card').addClass('searching-result');
                     $('.card').hide();
                     $('.searching-result').show();
@@ -121,26 +139,16 @@ $(document).ready(function() {
             outputError(searchingForm, searchField, 'nothingFound');
             setTimeout(function() {
                 searchField.val('');
-                $('.card').show();
                 btnSearch.attr('disabled', true);
             }, 2000);
-        }
-    });
-
-    // shows all of cards if user is typing again - test
-    searchField.on('input', function() {
-        $('.card').show();
-        if ( $('.card').hasClass('.searching-result') ) {
-            $('.card').removeClass('.searching-result');
         }
     });
 
 
     let requiredFields = false;
 
-    $('input').on('input', function() {
+    userInfoForm.find('input').on('input', function() {
         btnSave.attr('disabled', false);
-        btnSearch.attr('disabled', false);
     });
 
     btnSave.on('click', function() {
