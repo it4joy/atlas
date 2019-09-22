@@ -95,29 +95,35 @@ $(document).ready(function() {
     const searchingForm = $('#searching-form');
     const searchField = $('#search-field');
     const btnSearch = $('.btn-search');
+    let lastSearchFieldValLength = 0;
 
     // N: this event works in two-direction (input, erasing) in everywhere except for MS IE
     searchField.on('input', function() {
         btnSearch.attr('disabled', false);
 
         const searchFieldVal = $(this).val();
+        const currentSearchFieldValLength = searchFieldVal.length;
 
-        if (searchFieldVal.length < 1) {
+        if (currentSearchFieldValLength < 1) {
             btnSearch.attr('disabled', true);
+        }
 
+        if (currentSearchFieldValLength < lastSearchFieldValLength) {
             $('.card').show();
 
             if ( $('div').hasClass('searching-result') ) {
                 $('div').removeClass('searching-result');
             }
+
+            //console.log('currentSearchFieldValLength < lastSearchFieldValLength'); // test
+            //console.log(`currentSearchFieldValLength: ${currentSearchFieldValLength}; lastSearchFieldValLength: ${lastSearchFieldValLength}`); // test
         }
+
+        lastSearchFieldValLength = currentSearchFieldValLength;
     });
 
     // processes event of click on '.btn-search'
     btnSearch.on('click', function() {
-        // removes class '.searching-result' from the card marked in the past
-        //$('.card').removeClass('searching-result');
-
         let searchRequest = $(searchField).val();
         searchRequest = searchRequest.trim();
         const regExp = new RegExp(searchRequest, 'i');
