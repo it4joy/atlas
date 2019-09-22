@@ -214,7 +214,8 @@ $(document).ready(function() {
                 url: 'php/app.php',
                 data: postData,
                 success: function(data) {
-                    const response = $.parseJSON(data);
+                    const responseRaw = $.parseJSON(data);
+                    const response = responseRaw.response;
                     alert(response);
                 },
                 error: function(jqxhr, status, errMsg) {

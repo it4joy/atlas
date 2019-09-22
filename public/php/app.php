@@ -50,7 +50,6 @@ if ( !empty($_POST) ) {
 
         // converts to string
         $rightsConverted = implode(", ", $rights);
-        print_r($rightsConverted); // test
 
         // provides safety
         $fullname = mysqli_real_escape_string($link, $fullname);
@@ -64,7 +63,7 @@ if ( !empty($_POST) ) {
         $query = "INSERT INTO Users(Full_Name, Email, Birthday, Gender, Doc_Type, Doc_Number, Rights, User_IP, Browser) VALUES('$fullname', '$email', '$birthday', '$gender', '$docType', '$docNumber', '$rightsConverted', '$userIP', '$browser')";
 
         if ( mysqli_query($link, $query) ) {
-            echo json_encode("Запись добавлена!");
+            echo json_encode( array("response" => "Запись добавлена!") );
         } else {
             echo json_encode( $errArray["requestFailure"] );
         }
