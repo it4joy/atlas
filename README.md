@@ -7,5 +7,6 @@ Please, see live demo:
 
 ### features
 (on state of: 2019-09-23)  
-- jQuery
-- Search on page with record's list ([link](https://it4joy.ru/atlas/records.html)) is case insensitive, by required fields
+- jQuery;
+- Search on page with record's list ([link](https://it4joy.ru/atlas/records.html)) is case insensitive, by required fields;
+- Validation for user's info form on client and server side for required fields.
