@@ -44,14 +44,14 @@ $(document).ready(function() {
                         <div class='card'>
                             <div class='row'>
                                 <div class='col-6'>
-                                    <p class='p'><strong>ФИО:</strong> ${record.Full_Name}</p>
-                                    <p class='p'><strong>Дата рождения:</strong> ${record.Birthday}</p>
+                                    <p class='p required'><strong>ФИО:</strong> ${record.Full_Name}</p>
+                                    <p class='p required'><strong>Дата рождения:</strong> ${record.Birthday}</p>
                                     <p class='p'><strong>Тип документа:</strong> ${record.Doc_Type}</p>
                                     <p class='p'><strong>Права на доступ:</strong> ${record.Rights}</p>
                                     <p class='p'><strong>Броузер (User-Agent):</strong> ${record.Browser}</p>
                                 </div>
                                 <div class='col-6'>
-                                    <p class='p'><strong>Email:</strong> ${record.Email}</p>
+                                    <p class='p required'><strong>Email:</strong> ${record.Email}</p>
                                     <p class='p'><strong>Пол:</strong> ${record.Gender}</p>
                                     <p class='p'><strong>Номер документа:</strong> ${record.Doc_Number}</p>
                                     <p class='p'><strong>IP-адрес:</strong> ${record.User_IP}</p>
@@ -130,11 +130,13 @@ $(document).ready(function() {
 
         if ( $('.card').length > 0 ) {
             $('.card').each(function(i, el) {
-                const children = $(this).children();
+                const requiredFields = $(this).find('p.required');
 
-                children.each(function(i, el) {
+                //console.log(requiredFields.length); // test
+
+                requiredFields.each(function(i, el) {
                     if ( $(el).text().search(regExp) !== -1 ) {
-                        $(el).parents('.card').addClass('searching-result');
+                        $(this).parents('.card').addClass('searching-result');
                         $('.card').hide();
                         $('.searching-result').show();
                     }
