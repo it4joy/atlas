@@ -4,7 +4,7 @@ $(document).ready(function() {
     const errors = {
         emptyFields: 'Заполните, пожалуйста, поле.',
         invalidEmail: 'Email необходимо ввести в формате (пример): example@domain.com (без пробелов).',
-        notANumber: 'Пожалуйста, введите числа.',
+        notANumber: 'Пожалуйста, введите числа (без пробелов).',
         nothingFound: 'Ничего не найдено',
     };
 
@@ -225,6 +225,7 @@ $(document).ready(function() {
             });
 
             userInfoForm.trigger('reset');
+            requiredFields = false;
         }
     });
 });

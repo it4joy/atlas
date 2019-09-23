@@ -3,5 +3,6 @@
 /dist
 /node_modules
 /test
+/temp
 /tmp
 *.ico
