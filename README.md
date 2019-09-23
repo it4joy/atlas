@@ -1,6 +1,6 @@
 # atlas
 Test task for Atlas; vacancy: "Fullstack (PHP + JS + HTML) Developer"  
-[See live demo: ](https://it4joy.ru/atlas/index.html)
+[See live demo →](https://it4joy.ru/atlas/index.html)
 
 ### features
 - jQuery
